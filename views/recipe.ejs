@@ -1,0 +1,64 @@
+<%- include('partials/header') %>
+<div class="container bg-white main-recipe f-s-0-9">
+	<img src="<%= responseData.image%>" alt="<%= responseData.title %>" />
+	<div class="partition">
+		<div class="partition-primary">
+			<h2><%= responseData.title %></h2>
+			<div class="flex">
+				<div class="flex flex-direction-row">
+					<!-- <i class="fa-solid fa-utensils f-s-2-5"></i> -->
+					<!-- <i class="fa-solid fa-bowl-food f-s-2-5"></i> -->
+					<i class="fa-solid fa-bowl-rice f-s-2-5"></i>
+					<b class="m-8 m-b-16 f-s-0-8"> SERVES <%= responseData.servings %> STOMACH </b>
+				</div>
+				<div class="flex flex-direction-row">
+					<!-- <i class="fa-solid fa-bowl-rice f-s-2-5"></i> -->
+					<i class="fa-regular fa-clock f-s-2-5"></i>
+					<b class="m-8 f-s-0-8">
+						READY IN <%= responseData.readyInMinutes %> MINUTES
+					</b>
+				</div>
+			</div>
+
+			<p class="text-justify"><%- responseData.summary-%></p>
+			<h5 class="cursive">Directions</h5>
+			<% if (typeof responseData.instructions ==="undefined" ||
+			responseData.instructions === null ||
+			responseData.instructions.length === 0) { %> Read the detailed
+			instructions on
+			<a href="<%=responseData.sourceUrl %>" target="_blank"
+				><%= responseData.sourceName %></a
+			>
+			<% }else { %> <% const instructions =
+			responseData.instructions.split(".\n");%>
+			<ol>
+				<% instructions.forEach((instruction) => { %>
+				<li><%- instruction %></li>
+				<% }) %>
+			</ol>
+			<% } %>
+		</div>
+		<div class="partition-secondary">
+			<h5 class="cursive">Ingredients</h5>
+			<ul class="ingredient-list">
+				<% responseData.extendedIngredients.forEach(ingredient => { %>
+
+				<li class="f-s-0-9">
+					<%= ingredient.measures.us.amount %> <%=
+					ingredient.measures.us.unitLong %>
+					<img
+						src="https://spoonacular.com/cdn/ingredients_100x100/<%=ingredient.image%>"
+						alt=""
+						srcset=""
+					/>
+					<a href="/ingredient=<%= ingredient.name %>">
+						<span class="uc-first"> <%=ingredient.name %> </span>
+					</a>
+				</li>
+
+				<% }) %>
+			</ul>
+		</div>
+	</div>
+</div>
+<%-include('partials/footer') %>

@@ -1,0 +1,28 @@
+<%- include('partials/header') %>
+<div class="container bg-white f-s-0-9">
+	<% if ((responseData !== null ) && (responseData.length < 1)) { %>
+	<div class="flex">
+		<h2>No result found.</h2>
+	</div>
+	<% } %> <% if (responseData !== null) { %>
+	<div class="recipe-list">
+		<% responseData.forEach(recipe => { %>
+		<div class="flex flex-direction-row">
+			<a
+				href="/recipe/<%= recipe.title %>-<%= recipe.id %>"
+				class="flex flex-direction-row text-decoration-none f-s-0-9"
+			>
+				<div
+					class="img"
+					style="background-image: url('<%= recipe.image %>')"
+				></div>
+				<div class="details">
+					<h6><%= recipe.title %></h6>
+				</div>
+			</a>
+		</div>
+		<% }) %>
+	</div>
+	<% } %>
+</div>
+<%-include('partials/footer') %>

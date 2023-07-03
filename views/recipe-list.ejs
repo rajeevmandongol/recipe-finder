@@ -1,0 +1,16 @@
+<%- include('partials/header') %>
+<div class="container bg-white f-s-0-9">
+	<div class="recipe-list">
+		<% responseData.forEach(recipe => { %>
+		<div class="flex flex-direction-row">
+			<a href="/recipe/<%= recipe.id %>" class="flex flex-direction-row p-8 text-decoration-none f-s-0-9">
+				<img src="<%= recipe.image %>" alt="" />
+				<div class="details">
+					<h6><%= recipe.title %></h6>
+				</div>
+			</a>
+		</div>
+		<% }) %>
+	</div>
+</div>
+<%-include('partials/footer') %>
